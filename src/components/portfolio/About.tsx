@@ -3,7 +3,7 @@ import { WordReveal } from "./WordReveal";
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="about" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="02"
         eyebrow="About"
@@ -29,7 +29,7 @@ export function About() {
         </div>
         <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
           <WordReveal
-            text="I don't write code the old way. I sketch intent, converse with models, review what they generate, and ship. AI is a teammate, not a tool — that changes everything about how a product gets built."
+            text="I don't write code the old way. I sketch intent, converse with models, review what they generate, and ship. AI is a teammate, not a tool - that changes everything about how a product gets built."
             stagger={25}
           />
           <WordReveal

@@ -15,7 +15,7 @@ const REPOS: Repo[] = [
     key: "incodet-portfolio",
     title: "Incodet Portfolio",
     pitch:
-      "A studio-grade portfolio scaffold — modern React, componentized sections, and a design system built to be forked.",
+      "A studio-grade portfolio scaffold - modern React, componentized sections, and a design system built to be forked.",
     tags: ["React", "TypeScript", "Tailwind", "Vibe-coded"],
     href: "https://github.com/ryangsling/incodet-portfolio",
     apiUrl: "https://api.github.com/repos/ryangsling/incodet-portfolio",
@@ -24,7 +24,7 @@ const REPOS: Repo[] = [
     key: "IncBlog",
     title: "IncBlog",
     pitch:
-      "A full-stack blog platform: authoring, tags, feeds, and a clean reading experience — MVP first, polish continuously.",
+      "A full-stack blog platform: authoring, tags, feeds, and a clean reading experience - MVP first, polish continuously.",
     tags: ["Next.js", "Prisma", "Auth", "Vibe-coded"],
     href: "https://github.com/ryangsling/IncBlog",
     apiUrl: "https://api.github.com/repos/ryangsling/IncBlog",
@@ -33,14 +33,14 @@ const REPOS: Repo[] = [
     key: "Incodere-LMS",
     title: "Incodere LMS",
     pitch:
-      "A lightweight learning-management system for cohorts and courses — enrollments, lessons, and progress in one place.",
+      "A lightweight learning-management system for cohorts and courses - enrollments, lessons, and progress in one place.",
     tags: ["Full-stack", "TypeScript", "LMS", "Vibe-coded"],
     href: "https://github.com/ryangsling/Incodere-LMS",
     apiUrl: "https://api.github.com/repos/ryangsling/Incodere-LMS",
   },
 ];
 
-type Meta = { stars?: number; language?: string; updated?: string; description?: string };
+type Meta = { stars?: number; language?: string; updated?: string; description?: string; homepage?: string };
 
 function useRepoMeta(repos: Repo[]) {
   const [meta, setMeta] = useState<Record<string, Meta>>({});
@@ -62,6 +62,7 @@ function useRepoMeta(repos: Repo[]) {
                 language: j.language,
                 updated: j.pushed_at,
                 description: j.description,
+                homepage: j.homepage,
               } as Meta,
             ] as const;
           } catch {
@@ -79,7 +80,7 @@ function useRepoMeta(repos: Repo[]) {
 }
 
 function formatUpdated(iso?: string) {
-  if (!iso) return "—";
+  if (!iso) return "-";
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
@@ -87,29 +88,33 @@ function formatUpdated(iso?: string) {
 export function ProjectsStack() {
   const meta = useRepoMeta(REPOS);
   return (
-    <section id="projects" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="projects" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="04"
         eyebrow="Projects"
         title="Recent MVPs, straight from GitHub."
-        description="Three latest builds. Scroll — the cards stack, one on top of the other."
+        description="Three latest builds. Scroll - the cards stack, one on top of the other."
       />
       <div className="relative">
         {REPOS.map((r, i) => {
           const m = meta[r.key] ?? {};
           const topOffset = 96 + i * 28;
+          const live = m.homepage && m.homepage.trim() ? m.homepage : r.href;
           return (
             <div
               key={r.key}
               className="sticky"
               style={{ top: `${topOffset}px`, marginBottom: "2rem" }}
             >
-              <a
-                href={r.href}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-2xl border border-border bg-background/80 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
+              <div
+                className="group rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
               >
+                <a
+                  href={live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block"
+                >
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-muted-foreground">
@@ -119,8 +124,8 @@ export function ProjectsStack() {
                       {r.title}
                     </h3>
                   </div>
-                  <span className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    View on GitHub
+                  <span className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+                    Visit live
                     <span aria-hidden>↗</span>
                   </span>
                 </div>
@@ -141,13 +146,13 @@ export function ProjectsStack() {
                   <div>
                     <div className="text-foreground/50">Language</div>
                     <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.language ?? "—"}
+                      {m.language ?? "-"}
                     </div>
                   </div>
                   <div>
                     <div className="text-foreground/50">Stars</div>
                     <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.stars ?? "—"}
+                      {m.stars ?? "-"}
                     </div>
                   </div>
                   <div>
@@ -157,7 +162,22 @@ export function ProjectsStack() {
                     </div>
                   </div>
                 </div>
-              </a>
+                </a>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground transition-colors hover:border-accent hover:text-accent"
+                  >
+                    View on GitHub
+                    <span aria-hidden>↗</span>
+                  </a>
+                  <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    Card opens the live site
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}

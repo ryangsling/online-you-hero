@@ -2,9 +2,9 @@ import { WordReveal } from "./WordReveal";
 
 const bullets = [
   "Vibe-engineer full products & sites with AI as my co-pilot",
-  "Ship MVPs fast — Lovable, Cursor, Claude, GPT, Supabase",
+  "Ship MVPs fast - Lovable, Cursor, Claude, GPT, Supabase",
   "QA background: I build with edge cases baked in",
-  "Based in Sylhet, BD — working with teams worldwide",
+  "Based in Sylhet, BD - working with teams worldwide",
 ];
 
 export function Hero() {
@@ -21,10 +21,10 @@ export function Hero() {
         AI-Native Developer · Vibe Engineer
       </div>
 
-      <h1 className="font-display text-[13vw] md:text-[8.5vw] lg:text-[7.5rem] leading-[0.9] tracking-tight text-foreground">
+      <h1 className="font-display text-[13vw] md:text-[8.5vw] lg:text-[7.5rem] leading-[1] tracking-tight text-foreground pb-4">
         <WordReveal as="span" text="Hi, I'm" start className="block text-muted-foreground text-[0.35em] md:text-[0.28em] uppercase tracking-[0.3em] font-sans mb-6" stagger={80} />
         <WordReveal as="span" text="Ahmed Alif." start className="block" stagger={120} delay={200} />
-        <span className="block italic text-accent">
+        <span className="block italic text-accent pr-[0.15em]">
           <WordReveal as="span" text="I vibe-engineer" start delay={700} stagger={90} />
         </span>
       </h1>
@@ -36,7 +36,7 @@ export function Hero() {
         </div>
         <div className="space-y-4">
           <WordReveal
-            text="I'm an AI-native developer who partners with LLMs to design, build, and ship products end-to-end. Frontend, backend, automation, QA — I orchestrate the stack instead of hand-writing every line."
+            text="I'm an AI-native developer who partners with LLMs to design, build, and ship products end-to-end. Frontend, backend, automation, QA - I orchestrate the stack instead of hand-writing every line."
             className="text-xl md:text-2xl text-foreground leading-relaxed font-display"
             stagger={40}
           />

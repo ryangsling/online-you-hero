@@ -9,9 +9,9 @@ import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { SessionHUD } from "@/components/portfolio/SessionHUD";
 
-const title = "Ahmed Alif — AI-Native Developer & Vibe Engineer";
+const title = "Ahmed Alif - AI-Native Developer & Vibe Engineer";
 const description =
-  "I'm Md. Ahmed Alif — an AI-native developer from Sylhet who vibe-engineers products and websites with LLMs as co-pilots. Recent MVPs, experience, and a stack that ships.";
+  "I'm Md. Ahmed Alif - an AI-native developer from Sylhet who vibe-engineers products and websites with LLMs as co-pilots. Recent MVPs, experience, and a stack that ships.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground">
       <Header />
       <main>
         <Hero />

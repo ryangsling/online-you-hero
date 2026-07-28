@@ -5,25 +5,25 @@ const jobs = [
   {
     company: "Codeolo",
     role: "Manual QA Tester",
-    period: "Jan 2025 — Present",
+    period: "Jan 2025 - Present",
     project: "Zenyor Home Kiosk",
     href: "https://codeolo.com",
     bullets: [
       "Owned end-to-end manual QA for a home-kiosk product touching hardware, mobile, and web surfaces.",
       "Authored regression suites and repro steps that shortened triage time and cut escaped defects.",
-      "Partnered with devs on release readiness — signing off builds, verifying fixes, watching production.",
+      "Partnered with devs on release readiness - signing off builds, verifying fixes, watching production.",
     ],
   },
 ];
 
 export function Experience() {
   return (
-    <section id="work" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="work" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="03"
         eyebrow="Experience"
         title="Where I've turned bugs into shipped things."
-        description="Selected work — the story behind the resume line items."
+        description="Selected work - the story behind the resume line items."
       />
       <div className="grid gap-8 md:grid-cols-[1fr_1.4fr] md:gap-16">
         <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">

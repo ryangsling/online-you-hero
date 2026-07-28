@@ -46,7 +46,7 @@ export function WordReveal({
       {words.map((w, i) => {
         if (/^\s+$/.test(w)) return <span key={i}>{w}</span>;
         return (
-          <span key={i} className="inline-block overflow-hidden align-bottom">
+          <span key={i} className="inline-block align-baseline pb-[0.15em] pr-[0.05em]">
             <span
               className={`reveal-word ${active ? "reveal-in" : ""}`}
               style={{ transitionDelay: `${delay + (i / 2) * stagger}ms` }}
