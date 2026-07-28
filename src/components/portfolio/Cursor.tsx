@@ -1,8 +1,7 @@
 import { useEffect, useRef } from "react";
 
 export function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
+  const blobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -10,7 +9,7 @@ export function Cursor() {
     if (!fine) return;
     document.documentElement.classList.add("has-custom-cursor");
 
-    let dotX = 0, dotY = 0, ringX = 0, ringY = 0, tx = 0, ty = 0;
+    let x = 0, y = 0, tx = 0, ty = 0;
     let raf = 0;
 
     const onMove = (e: MouseEvent) => {
@@ -19,13 +18,11 @@ export function Cursor() {
       if (!raf) raf = requestAnimationFrame(loop);
     };
     const loop = () => {
-      dotX += (tx - dotX) * 0.55;
-      dotY += (ty - dotY) * 0.55;
-      ringX += (tx - ringX) * 0.18;
-      ringY += (ty - ringY) * 0.18;
-      if (dotRef.current) dotRef.current.style.transform = `translate(${dotX}px, ${dotY}px) translate(-50%, -50%)`;
-      if (ringRef.current) ringRef.current.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
-      if (Math.abs(tx - ringX) < 0.1 && Math.abs(ty - ringY) < 0.1) {
+      x += (tx - x) * 0.22;
+      y += (ty - y) * 0.22;
+      if (blobRef.current)
+        blobRef.current.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+      if (Math.abs(tx - x) < 0.1 && Math.abs(ty - y) < 0.1) {
         raf = 0;
         return;
       }
@@ -36,18 +33,16 @@ export function Cursor() {
       !!el?.closest('a, button, input, textarea, select, [role="button"], label, summary');
 
     const onOver = (e: MouseEvent) => {
-      if (isInteractive(e.target as Element)) ringRef.current?.classList.add("is-hover");
+      if (isInteractive(e.target as Element)) blobRef.current?.classList.add("is-hover");
     };
     const onOut = (e: MouseEvent) => {
-      if (isInteractive(e.target as Element)) ringRef.current?.classList.remove("is-hover");
+      if (isInteractive(e.target as Element)) blobRef.current?.classList.remove("is-hover");
     };
     const onLeave = () => {
-      if (dotRef.current) dotRef.current.style.opacity = "0";
-      if (ringRef.current) ringRef.current.style.opacity = "0";
+      if (blobRef.current) blobRef.current.style.opacity = "0";
     };
     const onEnter = () => {
-      if (dotRef.current) dotRef.current.style.opacity = "1";
-      if (ringRef.current) ringRef.current.style.opacity = "1";
+      if (blobRef.current) blobRef.current.style.opacity = "1";
     };
 
     window.addEventListener("mousemove", onMove);
@@ -67,9 +62,6 @@ export function Cursor() {
   }, []);
 
   return (
-    <>
-      <div ref={ringRef} className="cursor-ring" aria-hidden />
-      <div ref={dotRef} className="cursor-dot" aria-hidden />
-    </>
+    <div ref={blobRef} className="cursor-blob" aria-hidden />
   );
 }
