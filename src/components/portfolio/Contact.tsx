@@ -58,7 +58,7 @@ export function Contact() {
   return (
     <section id="contact" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
-        index="06"
+        index="07"
         eyebrow="Contact"
         title="Let's build something ridiculous."
         description="Tell me what you want to make. I reply fast."
