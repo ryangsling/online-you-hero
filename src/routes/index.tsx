@@ -8,6 +8,7 @@ import { Toolkit } from "@/components/portfolio/Toolkit";
 import { Contact } from "@/components/portfolio/Contact";
 import { Footer } from "@/components/portfolio/Footer";
 import { SessionHUD } from "@/components/portfolio/SessionHUD";
+import { Cursor } from "@/components/portfolio/Cursor";
 
 const title = "Ahmed Alif - AI-Native Developer & Vibe Engineer";
 const description =
@@ -42,6 +43,7 @@ function Index() {
       </main>
       <Footer />
       <SessionHUD />
+      <Cursor />
     </div>
   );
 }
