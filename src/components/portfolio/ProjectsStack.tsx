@@ -106,12 +106,15 @@ export function ProjectsStack() {
               className="sticky"
               style={{ top: `${topOffset}px`, marginBottom: "2rem" }}
             >
-              <a
-                href={live}
-                target="_blank"
-                rel="noreferrer"
-                className="group block rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
+              <div
+                className="group rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
               >
+                <a
+                  href={live}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block"
+                >
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-muted-foreground">
@@ -159,24 +162,22 @@ export function ProjectsStack() {
                     </div>
                   </div>
                 </div>
+                </a>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      window.open(r.href, "_blank", "noreferrer");
-                    }}
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground transition-colors hover:border-accent hover:text-accent"
                   >
                     View on GitHub
                     <span aria-hidden>↗</span>
-                  </button>
+                  </a>
                   <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                     Card opens the live site
                   </span>
                 </div>
-              </a>
+              </div>
             </div>
           );
         })}
