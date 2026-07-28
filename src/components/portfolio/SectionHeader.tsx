@@ -20,7 +20,7 @@ export function SectionHeader({
         <WordReveal
           as="h2"
           text={title}
-          className="font-display text-5xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tight text-foreground"
+          className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-foreground pb-2"
           stagger={60}
         />
         {description && (

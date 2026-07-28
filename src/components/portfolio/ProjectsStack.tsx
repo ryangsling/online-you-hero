@@ -40,7 +40,7 @@ const REPOS: Repo[] = [
   },
 ];
 
-type Meta = { stars?: number; language?: string; updated?: string; description?: string };
+type Meta = { stars?: number; language?: string; updated?: string; description?: string; homepage?: string };
 
 function useRepoMeta(repos: Repo[]) {
   const [meta, setMeta] = useState<Record<string, Meta>>({});
@@ -62,6 +62,7 @@ function useRepoMeta(repos: Repo[]) {
                 language: j.language,
                 updated: j.pushed_at,
                 description: j.description,
+                homepage: j.homepage,
               } as Meta,
             ] as const;
           } catch {
@@ -98,6 +99,7 @@ export function ProjectsStack() {
         {REPOS.map((r, i) => {
           const m = meta[r.key] ?? {};
           const topOffset = 96 + i * 28;
+          const live = m.homepage && m.homepage.trim() ? m.homepage : r.href;
           return (
             <div
               key={r.key}
@@ -105,10 +107,10 @@ export function ProjectsStack() {
               style={{ top: `${topOffset}px`, marginBottom: "2rem" }}
             >
               <a
-                href={r.href}
+                href={live}
                 target="_blank"
                 rel="noreferrer"
-                className="block rounded-2xl border border-border bg-background/80 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
+                className="group block rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-8 md:p-12 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
               >
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex items-baseline gap-4">
@@ -119,8 +121,8 @@ export function ProjectsStack() {
                       {r.title}
                     </h3>
                   </div>
-                  <span className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    View on GitHub
+                  <span className="hidden md:inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-accent">
+                    Visit live
                     <span aria-hidden>↗</span>
                   </span>
                 </div>
@@ -156,6 +158,23 @@ export function ProjectsStack() {
                       {formatUpdated(m.updated)}
                     </div>
                   </div>
+                </div>
+                <div className="mt-8 flex flex-wrap items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      window.open(r.href, "_blank", "noreferrer");
+                    }}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground transition-colors hover:border-accent hover:text-accent"
+                  >
+                    View on GitHub
+                    <span aria-hidden>↗</span>
+                  </button>
+                  <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                    Card opens the live site
+                  </span>
                 </div>
               </a>
             </div>
