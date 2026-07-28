@@ -30,7 +30,7 @@ export function Toolkit() {
         index="05"
         eyebrow="Toolkit"
         title="The stack I reach for."
-        description="Curated, not exhaustive — the things I actually use week to week."
+        description="Curated, not exhaustive - the things I actually use week to week."
       />
       <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
         {groups.map((g) => (

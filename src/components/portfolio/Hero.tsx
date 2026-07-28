@@ -2,9 +2,9 @@ import { WordReveal } from "./WordReveal";
 
 const bullets = [
   "Vibe-engineer full products & sites with AI as my co-pilot",
-  "Ship MVPs fast — Lovable, Cursor, Claude, GPT, Supabase",
+  "Ship MVPs fast - Lovable, Cursor, Claude, GPT, Supabase",
   "QA background: I build with edge cases baked in",
-  "Based in Sylhet, BD — working with teams worldwide",
+  "Based in Sylhet, BD - working with teams worldwide",
 ];
 
 export function Hero() {
@@ -36,7 +36,7 @@ export function Hero() {
         </div>
         <div className="space-y-4">
           <WordReveal
-            text="I'm an AI-native developer who partners with LLMs to design, build, and ship products end-to-end. Frontend, backend, automation, QA — I orchestrate the stack instead of hand-writing every line."
+            text="I'm an AI-native developer who partners with LLMs to design, build, and ship products end-to-end. Frontend, backend, automation, QA - I orchestrate the stack instead of hand-writing every line."
             className="text-xl md:text-2xl text-foreground leading-relaxed font-display"
             stagger={40}
           />

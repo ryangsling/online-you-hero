@@ -15,7 +15,7 @@ const REPOS: Repo[] = [
     key: "incodet-portfolio",
     title: "Incodet Portfolio",
     pitch:
-      "A studio-grade portfolio scaffold — modern React, componentized sections, and a design system built to be forked.",
+      "A studio-grade portfolio scaffold - modern React, componentized sections, and a design system built to be forked.",
     tags: ["React", "TypeScript", "Tailwind", "Vibe-coded"],
     href: "https://github.com/ryangsling/incodet-portfolio",
     apiUrl: "https://api.github.com/repos/ryangsling/incodet-portfolio",
@@ -24,7 +24,7 @@ const REPOS: Repo[] = [
     key: "IncBlog",
     title: "IncBlog",
     pitch:
-      "A full-stack blog platform: authoring, tags, feeds, and a clean reading experience — MVP first, polish continuously.",
+      "A full-stack blog platform: authoring, tags, feeds, and a clean reading experience - MVP first, polish continuously.",
     tags: ["Next.js", "Prisma", "Auth", "Vibe-coded"],
     href: "https://github.com/ryangsling/IncBlog",
     apiUrl: "https://api.github.com/repos/ryangsling/IncBlog",
@@ -33,7 +33,7 @@ const REPOS: Repo[] = [
     key: "Incodere-LMS",
     title: "Incodere LMS",
     pitch:
-      "A lightweight learning-management system for cohorts and courses — enrollments, lessons, and progress in one place.",
+      "A lightweight learning-management system for cohorts and courses - enrollments, lessons, and progress in one place.",
     tags: ["Full-stack", "TypeScript", "LMS", "Vibe-coded"],
     href: "https://github.com/ryangsling/Incodere-LMS",
     apiUrl: "https://api.github.com/repos/ryangsling/Incodere-LMS",
@@ -79,7 +79,7 @@ function useRepoMeta(repos: Repo[]) {
 }
 
 function formatUpdated(iso?: string) {
-  if (!iso) return "—";
+  if (!iso) return "-";
   const d = new Date(iso);
   return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
@@ -92,7 +92,7 @@ export function ProjectsStack() {
         index="04"
         eyebrow="Projects"
         title="Recent MVPs, straight from GitHub."
-        description="Three latest builds. Scroll — the cards stack, one on top of the other."
+        description="Three latest builds. Scroll - the cards stack, one on top of the other."
       />
       <div className="relative">
         {REPOS.map((r, i) => {
@@ -141,13 +141,13 @@ export function ProjectsStack() {
                   <div>
                     <div className="text-foreground/50">Language</div>
                     <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.language ?? "—"}
+                      {m.language ?? "-"}
                     </div>
                   </div>
                   <div>
                     <div className="text-foreground/50">Stars</div>
                     <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.stars ?? "—"}
+                      {m.stars ?? "-"}
                     </div>
                   </div>
                   <div>
