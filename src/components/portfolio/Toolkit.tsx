@@ -28,17 +28,20 @@ export function Toolkit() {
         title="The stack I reach for."
         description="Curated, not exhaustive - the things I actually use week to week."
       />
-      <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col">
         {groups.map((g) => (
-          <div key={g.label} className="border-t border-border pt-6">
-            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+          <div
+            key={g.label}
+            className="grid gap-6 md:grid-cols-[220px_1fr] md:gap-16 border-t border-border py-8"
+          >
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground pt-1">
               {g.label}
             </div>
-            <ul className="space-y-2">
+            <ul className="flex flex-wrap gap-x-8 gap-y-2">
               {g.items.map((it) => (
                 <li
                   key={it}
-                  className="font-display text-2xl text-foreground leading-tight"
+                  className="font-display text-2xl md:text-3xl text-foreground leading-tight"
                 >
                   {it}
                 </li>

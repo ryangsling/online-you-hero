@@ -4,7 +4,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative mx-auto max-w-[1200px] px-6 pt-24 pb-20 md:pt-28 md:pb-32"
+      className="relative mx-auto max-w-[1200px] px-6 pt-32 pb-20 md:pt-40 md:pb-32"
     >
       <div className="grid gap-10 md:grid-cols-[1.55fr_1fr] md:gap-12 items-stretch">
         <div className="flex flex-col">
