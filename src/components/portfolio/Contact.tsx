@@ -52,6 +52,9 @@ export function Contact() {
   const inputBase =
     "w-full bg-transparent border-b border-border px-1 py-3 text-lg text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-accent transition-colors";
 
+  const selectBase =
+    "w-full appearance-none cursor-pointer rounded-xl border border-border bg-card/60 backdrop-blur px-4 py-3 pr-10 text-base text-foreground focus:outline-none focus:border-accent hover:border-accent/60 transition-colors bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23c65f3a%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22/></svg>')] bg-no-repeat bg-[right_1rem_center]";
+
   return (
     <section id="contact" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
@@ -132,10 +135,10 @@ export function Contact() {
                 <select
                   value={form.projectType}
                   onChange={(e) => update("projectType", e.target.value)}
-                  className={inputBase + " appearance-none cursor-pointer"}
+                  className={selectBase + " mt-2"}
                 >
                   {projectTypes.map((t) => (
-                    <option key={t} value={t}>
+                    <option key={t} value={t} className="bg-background text-foreground">
                       {t}
                     </option>
                   ))}
@@ -148,10 +151,10 @@ export function Contact() {
                 <select
                   value={form.budget}
                   onChange={(e) => update("budget", e.target.value)}
-                  className={inputBase + " appearance-none cursor-pointer"}
+                  className={selectBase + " mt-2"}
                 >
                   {budgets.map((b) => (
-                    <option key={b} value={b}>
+                    <option key={b} value={b} className="bg-background text-foreground">
                       {b}
                     </option>
                   ))}
