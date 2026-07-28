@@ -24,7 +24,7 @@ export function Hero() {
       <h1 className="font-display text-[13vw] md:text-[8.5vw] lg:text-[7.5rem] leading-[0.9] tracking-tight text-foreground">
         <WordReveal as="span" text="Hi, I'm" start className="block text-muted-foreground text-[0.35em] md:text-[0.28em] uppercase tracking-[0.3em] font-sans mb-6" stagger={80} />
         <WordReveal as="span" text="Ahmed Alif." start className="block" stagger={120} delay={200} />
-        <span className="block italic text-accent">
+        <span className="block italic text-accent pr-[0.15em]">
           <WordReveal as="span" text="I vibe-engineer" start delay={700} stagger={90} />
         </span>
       </h1>
