@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { href: "#about", label: "About" },
@@ -47,11 +48,14 @@ export function Header() {
               {l.label}
             </a>
           ))}
+          <ThemeToggle />
         </nav>
-        <button
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden inline-flex items-center gap-2 text-sm text-foreground"
+          className="inline-flex items-center gap-2 text-sm text-foreground"
           aria-expanded={open}
           aria-label="Toggle menu"
         >
@@ -61,7 +65,8 @@ export function Header() {
               open ? "rotate-45" : ""
             }`}
           />
-        </button>
+          </button>
+        </div>
       </div>
       {open && (
         <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur">
