@@ -173,9 +173,6 @@ export function ProjectsStack() {
                     View on GitHub
                     <span aria-hidden>↗</span>
                   </a>
-                  <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                    Card opens the live site
-                  </span>
                 </div>
               </div>
             </div>

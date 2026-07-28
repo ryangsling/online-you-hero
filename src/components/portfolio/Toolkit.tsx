@@ -17,10 +17,6 @@ const groups = [
     label: "QA & Ops",
     items: ["Manual QA", "Regression suites", "Bug triage", "Git", "GitHub Actions"],
   },
-  {
-    label: "Automation",
-    items: ["n8n", "Zapier", "Webhooks", "Cron jobs", "Prompt pipelines"],
-  },
 ];
 
 export function Toolkit() {
