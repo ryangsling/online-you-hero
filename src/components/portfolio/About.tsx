@@ -3,7 +3,7 @@ import { WordReveal } from "./WordReveal";
 
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="about" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="02"
         eyebrow="About"

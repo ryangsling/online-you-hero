@@ -9,7 +9,7 @@ const rows = [
 
 export function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="contact" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="06"
         eyebrow="Contact"

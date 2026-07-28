@@ -87,7 +87,7 @@ function formatUpdated(iso?: string) {
 export function ProjectsStack() {
   const meta = useRepoMeta(REPOS);
   return (
-    <section id="projects" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="projects" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="04"
         eyebrow="Projects"

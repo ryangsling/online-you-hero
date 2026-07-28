@@ -18,7 +18,7 @@ const jobs = [
 
 export function Experience() {
   return (
-    <section id="work" className="mx-auto max-w-[1200px] px-6 py-32 md:py-40">
+    <section id="work" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
       <SectionHeader
         index="03"
         eyebrow="Experience"
