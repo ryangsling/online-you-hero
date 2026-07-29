@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
+import incodetShot from "@/assets/incodet.png.asset.json";
+import incblogShot from "@/assets/incblog.png.asset.json";
+import incodereShot from "@/assets/incodere-lms.png.asset.json";
 
 type Repo = {
   key: string;
@@ -8,6 +11,7 @@ type Repo = {
   tags: string[];
   href: string;
   apiUrl: string;
+  image: string;
 };
 
 const REPOS: Repo[] = [
@@ -19,6 +23,7 @@ const REPOS: Repo[] = [
     tags: ["React", "TypeScript", "Tailwind", "Vibe-coded"],
     href: "https://github.com/ryangsling/incodet-portfolio",
     apiUrl: "https://api.github.com/repos/ryangsling/incodet-portfolio",
+    image: incodetShot.url,
   },
   {
     key: "IncBlog",
@@ -28,6 +33,7 @@ const REPOS: Repo[] = [
     tags: ["Next.js", "Prisma", "Auth", "Vibe-coded"],
     href: "https://github.com/ryangsling/IncBlog",
     apiUrl: "https://api.github.com/repos/ryangsling/IncBlog",
+    image: incblogShot.url,
   },
   {
     key: "Incodere-LMS",
@@ -37,10 +43,11 @@ const REPOS: Repo[] = [
     tags: ["Full-stack", "TypeScript", "LMS", "Vibe-coded"],
     href: "https://github.com/ryangsling/Incodere-LMS",
     apiUrl: "https://api.github.com/repos/ryangsling/Incodere-LMS",
+    image: incodereShot.url,
   },
 ];
 
-type Meta = { stars?: number; language?: string; updated?: string; description?: string; homepage?: string };
+type Meta = { description?: string; homepage?: string };
 
 function useRepoMeta(repos: Repo[]) {
   const [meta, setMeta] = useState<Record<string, Meta>>({});
@@ -58,9 +65,6 @@ function useRepoMeta(repos: Repo[]) {
             return [
               r.key,
               {
-                stars: j.stargazers_count,
-                language: j.language,
-                updated: j.pushed_at,
                 description: j.description,
                 homepage: j.homepage,
               } as Meta,
@@ -77,12 +81,6 @@ function useRepoMeta(repos: Repo[]) {
     };
   }, [repos]);
   return meta;
-}
-
-function formatUpdated(iso?: string) {
-  if (!iso) return "-";
-  const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 export function ProjectsStack() {
@@ -115,6 +113,14 @@ export function ProjectsStack() {
                   rel="noreferrer"
                   className="block"
                 >
+                <div className="mb-8 relative overflow-hidden rounded-xl border border-border aspect-[16/9] bg-muted/40">
+                  <img
+                    src={r.image}
+                    alt={`${r.title} preview`}
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  />
+                </div>
                 <div className="flex items-start justify-between gap-6">
                   <div className="flex items-baseline gap-4">
                     <span className="font-mono text-sm text-muted-foreground">
@@ -141,26 +147,6 @@ export function ProjectsStack() {
                       {t}
                     </span>
                   ))}
-                </div>
-                <div className="mt-8 pt-6 border-t border-border grid grid-cols-3 gap-4 text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                  <div>
-                    <div className="text-foreground/50">Language</div>
-                    <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.language ?? "-"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-foreground/50">Stars</div>
-                    <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {m.stars ?? "-"}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-foreground/50">Updated</div>
-                    <div className="mt-1 text-foreground normal-case tracking-normal text-sm">
-                      {formatUpdated(m.updated)}
-                    </div>
-                  </div>
                 </div>
                 </a>
                 <div className="mt-8 flex flex-wrap items-center gap-3">
