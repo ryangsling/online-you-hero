@@ -3,6 +3,18 @@ import { WordReveal } from "./WordReveal";
 
 const jobs = [
   {
+    company: "Incodet",
+    role: "Co-founder & COO",
+    period: "Feb 2026 - Present",
+    project: "Incodet, Incodere LMS, IncBlog",
+    href: "https://incodet.com",
+    bullets: [
+      "Co-founded Incodet and lead operations end-to-end: client sniping/hunting, delivery, and go-to-market.",
+      "Built Incodet's main site plus both flagship MVPs - Incodere LMS and IncBlog - shipped with an AI-native workflow.",
+      "Currently building Incodere, our sub-brand delivering accredited B2B corporate training to the UK, USA, and Australia.",
+    ],
+  },
+  {
     company: "Zenyor",
     role: "Manual QA Tester",
     period: "Jan 2025 - May 2025",
