@@ -42,7 +42,7 @@ function readTime(text: string) {
   return `${Math.max(1, Math.round(words / 200))} min read`;
 }
 
-async function fetchCoverAndCategory(url: string): Promise<{ cover?: string; category?: string }> {
+async function fetchPostMeta(url: string): Promise<{ cover?: string; category?: string; readTime?: string }> {
   try {
     const res = await fetch(url, { headers: { "user-agent": "portfolio-bot" } });
     if (!res.ok) return {};
@@ -52,7 +52,17 @@ async function fetchCoverAndCategory(url: string): Promise<{ cover?: string; cat
     if (cover && cover.startsWith("/")) cover = ORIGIN + cover;
     const cat = html.match(/\/category\/([^"'/]+)["']/i);
     const category = cat ? decodeURIComponent(cat[1]).replace(/-/g, " ") : undefined;
-    return { cover, category };
+    // Extract article body for accurate word count
+    const article = html.match(/<article[\s\S]*?<\/article>/i)?.[0]
+      ?? html.match(/<main[\s\S]*?<\/main>/i)?.[0]
+      ?? html;
+    const text = article.replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    const rt = text ? readTime(text) : undefined;
+    return { cover, category, readTime: rt };
   } catch {
     return {};
   }
@@ -80,7 +90,7 @@ export const getBlogPosts = createServerFn({ method: "GET" }).handler(async (): 
     });
     // Enrich the first 3 with cover + category
     const enriched = await Promise.all(
-      base.map(async (p, i) => (i < 3 ? { ...p, ...(await fetchCoverAndCategory(p.url)) } : p)),
+      base.map(async (p, i) => (i < 3 ? { ...p, ...(await fetchPostMeta(p.url)) } : p)),
     );
     return enriched;
   } catch {

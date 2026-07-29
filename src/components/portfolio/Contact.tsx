@@ -1,5 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { SectionHeader } from "./SectionHeader";
+import { useServerFn } from "@tanstack/react-start";
+import { submitInquiry } from "@/lib/contact.functions";
 
 const projectTypes = [
   "MVP / Prototype",
@@ -23,6 +25,8 @@ type Status = "idle" | "submitting" | "sent" | "error";
 
 export function Contact() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const send = useServerFn(submitInquiry);
   const [form, setForm] = useState({
     email: "",
     projectType: projectTypes[0],
@@ -37,14 +41,14 @@ export function Contact() {
     e.preventDefault();
     if (!form.email || !form.message) return;
     setStatus("submitting");
-    const subject = `New project inquiry: ${form.projectType}`;
-    const body = `From: ${form.email}\nType: ${form.projectType}\nBudget: ${form.budget}\n\n${form.message}`;
+    setErrorMsg("");
     try {
-      window.location.href = `mailto:jamesahsan1371@gmail.com?subject=${encodeURIComponent(
-        subject,
-      )}&body=${encodeURIComponent(body)}`;
+      await send({ data: form });
       setStatus("sent");
-    } catch {
+      setForm({ email: "", projectType: projectTypes[0], budget: budgets[1], message: "" });
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Something went wrong. Please try again or email me directly.");
       setStatus("error");
     }
   }
@@ -70,10 +74,10 @@ export function Contact() {
               Direct
             </div>
             <a
-              href="mailto:jamesahsan1371@gmail.com"
+              href="mailto:ahmedalif1371@gmail.com"
               className="font-display text-2xl text-foreground hover:text-accent transition-colors block"
             >
-              jamesahsan1371@gmail.com
+              ahmedalif1371@gmail.com
             </a>
             <a
               href="tel:+8801747699172"
@@ -95,12 +99,12 @@ export function Contact() {
               github.com/ryangsling ↗
             </a>
             <a
-              href="https://linkedin.com/in/alif"
+              href="https://www.linkedin.com/in/md-ahmed-alif-315682259/"
               target="_blank"
               rel="noreferrer"
               className="hover:text-accent transition-colors block mt-1"
             >
-              linkedin.com/in/alif ↗
+              linkedin.com/in/md-ahmed-alif ↗
             </a>
           </div>
           <div className="pt-4 text-xs uppercase tracking-[0.2em] text-foreground/50">
@@ -176,21 +180,26 @@ export function Contact() {
               />
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2">
+            <div className="flex flex-col gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-4">
               <button
                 type="submit"
                 disabled={status === "submitting"}
                 className="group inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3 text-sm uppercase tracking-[0.2em] text-background transition-all hover:bg-accent hover:gap-4 disabled:opacity-60"
               >
-                {status === "sent" ? "Opening mail..." : "Send inquiry"}
+                {status === "submitting" ? "Sending..." : status === "sent" ? "Sent" : "Send inquiry"}
                 <span aria-hidden className="transition-transform group-hover:translate-x-1">
                   →
                 </span>
               </button>
+              </div>
               {status === "sent" && (
-                <span className="text-xs uppercase tracking-[0.2em] text-accent">
-                  Draft ready in your mail app
-                </span>
+                <p className="text-sm text-accent">
+                  Thanks! Your request has been received. I will get back to you shortly.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-destructive">{errorMsg}</p>
               )}
             </div>
           </div>

@@ -3,11 +3,11 @@ import { WordReveal } from "./WordReveal";
 
 const jobs = [
   {
-    company: "Codeolo",
+    company: "Zenyor",
     role: "Manual QA Tester",
-    period: "Jan 2025 - Present",
+    period: "Jan 2025 - May 2025",
     project: "Zenyor Home Kiosk",
-    href: "https://codeolo.com",
+    href: "https://www.zenyor.com/",
     bullets: [
       "Owned end-to-end manual QA for a home-kiosk product touching hardware, mobile, and web surfaces.",
       "Authored regression suites and repro steps that shortened triage time and cut escaped defects.",
