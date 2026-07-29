@@ -16,6 +16,17 @@ const title = "Ahmed Alif - AI-Native Developer & Vibe Engineer";
 const description =
   "I'm Md. Ahmed Alif - an AI-native developer from Sylhet who vibe-engineers products and websites with LLMs as co-pilots. Recent MVPs, experience, and a stack that ships.";
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Md. Ahmed Alif",
+  jobTitle: "AI-Native Developer & Vibe Engineer",
+  url: "https://online-you-hero.lovable.app",
+  sameAs: [
+    "https://github.com/ryangsling",
+  ],
+};
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -26,6 +37,12 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(personJsonLd),
+      },
     ],
   }),
   component: Index,
