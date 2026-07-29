@@ -17,13 +17,21 @@ export function About() {
               Leading University, Sylhet
             </div>
             <div className="text-muted-foreground normal-case tracking-normal text-sm">
-              BSc. Computer Science & Engineering · 2022 – Present
+              BSc. Computer Science & Engineering · Graduated 2026
             </div>
           </div>
           <div className="pt-4">
             <div className="text-foreground/60">Currently</div>
             <div className="mt-1 text-foreground normal-case tracking-normal text-base font-display">
-              Building & QA-ing at Codeolo
+              Co-founder & COO at{" "}
+              <a
+                href="https://incodet.com"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-accent/40 underline-offset-4 hover:text-accent transition-colors"
+              >
+                Incodet
+              </a>
             </div>
           </div>
         </div>
