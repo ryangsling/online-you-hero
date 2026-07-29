@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
-import incodetShot from "@/assets/incodet.png.asset.json";
-import incblogShot from "@/assets/incblog.png.asset.json";
-import incodereShot from "@/assets/incodere-lms.png.asset.json";
+import incodetShot from "@/assets/incodet.png";
+import incblogShot from "@/assets/incblog.png";
+import incodereShot from "@/assets/incodere-lms.png";
 
 type Repo = {
   key: string;
@@ -24,7 +24,7 @@ const REPOS: Repo[] = [
     tags: ["React", "TypeScript", "Tailwind", "Vibe-coded"],
     href: "https://github.com/ryangsling/incodet-portfolio",
     apiUrl: "https://api.github.com/repos/ryangsling/incodet-portfolio",
-    image: incodetShot.url,
+    image: incodetShot,
     live: "https://incodet.com",
   },
   {
@@ -35,7 +35,7 @@ const REPOS: Repo[] = [
     tags: ["Next.js", "Prisma", "Auth", "Vibe-coded"],
     href: "https://github.com/ryangsling/IncBlog",
     apiUrl: "https://api.github.com/repos/ryangsling/IncBlog",
-    image: incblogShot.url,
+    image: incblogShot,
     live: "https://incblog.fly.dev",
   },
   {
@@ -46,7 +46,7 @@ const REPOS: Repo[] = [
     tags: ["Full-stack", "TypeScript", "LMS", "Vibe-coded"],
     href: "https://github.com/ryangsling/Incodere-LMS",
     apiUrl: "https://api.github.com/repos/ryangsling/Incodere-LMS",
-    image: incodereShot.url,
+    image: incodereShot,
   },
 ];
 
