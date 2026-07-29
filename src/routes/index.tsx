@@ -14,7 +14,7 @@ import { Cursor } from "@/components/portfolio/Cursor";
 
 const title = "Ahmed Alif - AI-Native Developer & Vibe Engineer";
 const description =
-  "I'm Md. Ahmed Alif - an AI-native developer from Sylhet who vibe-engineers products and websites with LLMs as co-pilots. Recent MVPs, experience, and a stack that ships.";
+  "Md. Ahmed Alif — AI-native developer and vibe engineer building products and websites with LLMs as co-pilots.";
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -35,9 +35,11 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://online-you-hero.lovable.app/" },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
     ],
+    links: [{ rel: "canonical", href: "/" }],
     scripts: [
       {
         type: "application/ld+json",
