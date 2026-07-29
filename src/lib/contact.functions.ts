@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 const schema = z.object({
   email: z.string().trim().email().max(255),
@@ -12,6 +11,7 @@ const schema = z.object({
 export const submitInquiry = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { error } = await supabaseAdmin.from("contact_inquiries").insert({
       email: data.email,
       project_type: data.projectType,
