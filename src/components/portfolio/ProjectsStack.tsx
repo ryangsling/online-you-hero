@@ -108,15 +108,17 @@ export function ProjectsStack() {
               style={{ top: `${topOffset}px`, marginBottom: "1.25rem" }}
             >
               <div
-                className="group relative rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-5 md:p-6 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
+                role="link"
+                tabIndex={0}
+                onClick={() => window.open(live, "_blank", "noopener,noreferrer")}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    window.open(live, "_blank", "noopener,noreferrer");
+                  }
+                }}
+                className="group relative rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-5 md:p-6 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1 cursor-pointer"
               >
-                <a
-                  href={live}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`${r.title} - visit live site`}
-                  className="absolute inset-0 z-10 rounded-2xl"
-                />
                 <div className="mb-5 relative overflow-hidden rounded-xl border border-border bg-muted/40 h-[140px] md:h-[180px]">
                   <img
                     src={r.image}
@@ -152,11 +154,12 @@ export function ProjectsStack() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-4 flex flex-wrap items-center gap-3 relative z-20">
+                <div className="mt-4 flex flex-wrap items-center gap-3 relative">
                   <a
                     href={r.href}
                     target="_blank"
                     rel="noreferrer"
+                    onClick={(e) => e.stopPropagation()}
                     className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2 text-xs uppercase tracking-[0.2em] text-foreground transition-colors hover:border-accent hover:text-accent cursor-pointer"
                   >
                     View on GitHub

@@ -43,7 +43,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
             Authorization: `Bearer ${RESEND_API_KEY}`,
           },
           body: JSON.stringify({
-            from: "Portfolio Inquiry <onboarding@resend.dev>",
+            from: "Portfolio Inquiry <hello@alif.pro.bd>",
             to: ["ahmedalif1371@gmail.com"],
             reply_to: data.email,
             subject: `New inquiry: ${data.projectType} (${data.budget})`,
