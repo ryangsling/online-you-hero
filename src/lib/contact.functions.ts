@@ -12,7 +12,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => schema.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("contact_inquiries").insert({
+    const { error } = await (supabaseAdmin.from as any)("contact_inquiries").insert({
       email: data.email,
       project_type: data.projectType,
       budget: data.budget,
