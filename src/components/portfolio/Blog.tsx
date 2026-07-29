@@ -27,8 +27,6 @@ export function Blog() {
   });
 
   const posts = (data && data.length > 0 ? data : FALLBACK).slice(0, 3);
-  const featured = posts[0];
-  const rest = posts.slice(1);
 
   return (
     <section id="blog" className="mx-auto max-w-[1200px] px-6 py-20 md:py-28">
@@ -39,80 +37,60 @@ export function Blog() {
         description="I write about vibe-engineering, AI workflows, and what actually ships. Latest posts from IncBlog, auto-synced."
       />
 
-      {featured && (
-        <FadeIn>
-          <a
-            href={featured.url}
-            target="_blank"
-            rel="noreferrer"
-            className="group grid gap-8 md:grid-cols-[1.05fr_1fr] md:gap-12 items-stretch rounded-2xl border border-border bg-card/40 backdrop-blur p-4 md:p-6 hover:border-accent/60 transition-colors"
-          >
-            {featured.cover && (
-              <div className="relative overflow-hidden rounded-xl border border-border aspect-[16/10] md:aspect-auto">
-                <img
-                  src={featured.cover}
-                  alt={featured.title}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                />
-              </div>
-            )}
-            <div className="flex flex-col justify-between p-2 md:p-4">
-              <div>
-                <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-                  {featured.category && <span>{featured.category}</span>}
-                  {featured.category && <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />}
-                  <span>{featured.date}</span>
-                  {featured.readTime && <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />}
-                  {featured.readTime && <span>{featured.readTime}</span>}
-                </div>
-                <h3 className="mt-5 font-display text-3xl md:text-4xl leading-[1.1] text-foreground group-hover:text-accent transition-colors">
-                  {featured.title}
-                </h3>
-                <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-                  {featured.excerpt}
-                </p>
-              </div>
-              <div className="mt-8 flex items-center gap-3">
-                <span className="inline-flex items-center gap-3 rounded-full bg-foreground px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-background transition-all group-hover:bg-accent group-hover:gap-4">
-                  Read post
-                  <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-                </span>
-              </div>
-            </div>
-          </a>
-        </FadeIn>
-      )}
-
-      {rest.length > 0 && (
-        <div className="mt-8 grid gap-6 md:grid-cols-2">
-          {rest.map((post) => (
-            <FadeIn key={post.url}>
+      <FadeIn>
+        <div className="-mx-6 px-6 overflow-x-auto snap-x snap-mandatory scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-6 md:gap-8 pb-4">
+            {posts.map((post) => (
               <a
+                key={post.url}
                 href={post.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card/40 backdrop-blur p-6 hover:border-accent/60 transition-colors"
+                className="group snap-start shrink-0 w-[85%] sm:w-[420px] md:w-[440px] flex flex-col rounded-2xl border border-border bg-card/40 backdrop-blur overflow-hidden hover:border-accent/60 transition-colors"
               >
-                <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
-                  {post.category && <span>{post.category}</span>}
-                  {post.category && <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />}
-                  <span>{post.date}</span>
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-muted/40">
+                  {post.cover ? (
+                    <img
+                      src={post.cover}
+                      alt={post.title}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 grid place-items-center text-xs uppercase tracking-[0.2em] text-muted-foreground">
+                      IncBlog
+                    </div>
+                  )}
                 </div>
-                <h4 className="mt-4 font-display text-2xl leading-[1.15] text-foreground group-hover:text-accent transition-colors">
-                  {post.title}
-                </h4>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">
-                  {post.excerpt}
-                </p>
-                <span className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground group-hover:text-accent transition-colors">
-                  Read post →
-                </span>
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex flex-wrap items-center gap-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">
+                    {post.category && <span>{post.category}</span>}
+                    {post.category && <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />}
+                    <span>{post.date}</span>
+                    {post.readTime && <span className="h-1 w-1 rounded-full bg-muted-foreground/60" />}
+                    {post.readTime && <span>{post.readTime}</span>}
+                  </div>
+                  <h3 className="mt-4 font-display text-2xl md:text-3xl leading-[1.15] text-foreground group-hover:text-accent transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-6 pt-4 border-t border-border">
+                    <span className="inline-flex items-center gap-3 rounded-full bg-foreground px-5 py-2.5 text-xs uppercase tracking-[0.2em] text-background transition-all group-hover:bg-accent group-hover:gap-4">
+                      Read post
+                      <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+                    </span>
+                  </div>
+                </div>
               </a>
-            </FadeIn>
-          ))}
+            ))}
+          </div>
         </div>
-      )}
+        <div className="mt-3 text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground/70 md:hidden">
+          Swipe →
+        </div>
+      </FadeIn>
 
       <FadeIn>
         <div className="mt-12 flex justify-center">
