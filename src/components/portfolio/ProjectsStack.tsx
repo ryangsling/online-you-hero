@@ -12,6 +12,7 @@ type Repo = {
   href: string;
   apiUrl: string;
   image: string;
+  live?: string;
 };
 
 const REPOS: Repo[] = [
@@ -24,6 +25,7 @@ const REPOS: Repo[] = [
     href: "https://github.com/ryangsling/incodet-portfolio",
     apiUrl: "https://api.github.com/repos/ryangsling/incodet-portfolio",
     image: incodetShot.url,
+    live: "https://incodet.com",
   },
   {
     key: "IncBlog",
@@ -34,6 +36,7 @@ const REPOS: Repo[] = [
     href: "https://github.com/ryangsling/IncBlog",
     apiUrl: "https://api.github.com/repos/ryangsling/IncBlog",
     image: incblogShot.url,
+    live: "https://incblog.fly.dev",
   },
   {
     key: "Incodere-LMS",
@@ -96,21 +99,21 @@ export function ProjectsStack() {
       <div className="relative">
         {REPOS.map((r, i) => {
           const m = meta[r.key] ?? {};
-          const topOffset = 96 + i * 24;
-          const live = m.homepage && m.homepage.trim() ? m.homepage : r.href;
+          const topOffset = 96 + i * 20;
+          const live = r.live ?? (m.homepage && m.homepage.trim() ? m.homepage : r.href);
           return (
             <div
               key={r.key}
               className="sticky"
-              style={{ top: `${topOffset}px`, marginBottom: "2rem" }}
+              style={{ top: `${topOffset}px`, marginBottom: "1.25rem" }}
             >
               <a
                 href={live}
                 target="_blank"
                 rel="noreferrer"
-                className="group block rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-6 md:p-8 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
+                className="group block rounded-2xl border border-border bg-background/95 backdrop-blur-sm p-5 md:p-6 shadow-[0_20px_60px_-30px_rgba(20,20,20,0.35)] transition-all hover:border-accent/60 hover:-translate-y-1"
               >
-                <div className="mb-6 relative overflow-hidden rounded-xl border border-border aspect-[21/8] bg-muted/40">
+                <div className="mb-5 relative overflow-hidden rounded-xl border border-border bg-muted/40 h-[140px] md:h-[180px]">
                   <img
                     src={r.image}
                     alt={`${r.title} preview`}
@@ -123,7 +126,7 @@ export function ProjectsStack() {
                     <span className="font-mono text-sm text-muted-foreground">
                       0{i + 1}
                     </span>
-                    <h3 className="font-display text-3xl md:text-5xl leading-none tracking-tight text-foreground">
+                    <h3 className="font-display text-2xl md:text-4xl leading-none tracking-tight text-foreground pb-1">
                       {r.title}
                     </h3>
                   </div>
@@ -132,10 +135,10 @@ export function ProjectsStack() {
                     <span aria-hidden>↗</span>
                   </span>
                 </div>
-                <p className="mt-4 max-w-2xl text-base text-muted-foreground leading-relaxed">
+                <p className="mt-3 max-w-2xl text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-2">
                   {m.description || r.pitch}
                 </p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <div className="mt-4 flex flex-wrap gap-2">
                   {r.tags.map((t) => (
                     <span
                       key={t}
@@ -145,7 +148,7 @@ export function ProjectsStack() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex flex-wrap items-center gap-3">
+                <div className="mt-4 flex flex-wrap items-center gap-3">
                   <span
                     role="button"
                     tabIndex={0}
