@@ -411,7 +411,7 @@ export const designProjects: DesignProject[] = [
     description:
       'Incodet is a software development company focused on turning ideas into scalable digital products, including websites, mobile applications, SaaS platforms, and custom software solutions.\n\nThis project explores how Incodet can promote its services through a collection of digital advertisements, conceptual posters, and an informational flyer. The goal was to communicate the company\u2019s value, make its services easier to understand, and create visually engaging marketing materials that remain consistent with the established brand identity.\n\nRather than using one layout for every design, I explored several creative directions, from minimal typography-led compositions to cinematic 3D imagery, interface mockups, and structured service layouts.\n\nEach piece serves a different communication purpose while maintaining the same foundation of typography, color, branding, and visual hierarchy.',
     deliverables: [
-      'Seven design concepts',
+      'Six design concepts',
       'One A4 flyer, digital ad creatives, and promotional posters',
       'Minimal typography-led, bold gradient, interface-led, and cinematic conceptual directions',
       'Social media, digital campaign, service promotion, and informational marketing uses',
@@ -475,7 +475,7 @@ export const designProjects: DesignProject[] = [
       {
         heading: 'The Outcome',
         paragraphs: [
-          'The result is a collection of seven promotional design concepts for Incodet, covering an A4 flyer, service-led advertising graphics, and conceptual posters.',
+          'The result is a collection of six promotional design concepts for Incodet, covering an A4 flyer, service-led advertising graphics, and conceptual posters.',
           'The collection demonstrates how a single brand identity can be adapted to different communication goals, from explaining services clearly to creating a more memorable visual statement.',
           'The range of compositions also establishes a foundation for future marketing materials, allowing Incodet to explore new messages and formats while maintaining a consistent visual presence.',
         ],
@@ -524,14 +524,6 @@ export const designProjects: DesignProject[] = [
       },
       {
         num: '05',
-        headline: 'We Don\u2019t Just Build Software. We Build Your Digital Edge.',
-        theme: 'Software development advertising concept',
-        image: '/assets/images/incodet-ads/Incodet-Ad-C-Websites-That-Work.png',
-        supporting:
-          'A top-down view of a team gathered around a large website interface, turning the central design into the main subject. The website mockup incorporates service messaging, navigation elements, calls to action, and a dark dashboard preview. The closing headline reinforces the central message: software development is about helping businesses create useful digital products, not simply writing code. The concept combines a human-centered composition with interface design to present Incodet as a partner in digital product creation.',
-      },
-      {
-        num: '06',
         headline: 'Your Idea. Enter Reality.',
         theme: 'Cinematic conceptual poster',
         image: '/assets/images/design-projects/incodet-ads/Enter_Reality__From_Concept_to_Launch.png',
@@ -539,7 +531,7 @@ export const designProjects: DesignProject[] = [
           'This poster explores the idea of turning an initial concept into a finished digital product through a visual journey. A sequence of illuminated keyboard keys leads toward a large Enter-key portal. Each step represents part of the process, including web development, UI/UX design, mobile applications, and SaaS platforms. The dark navy environment, electric-blue lighting, reflective surfaces, and glowing portal create a cinematic atmosphere.',
       },
       {
-        num: '07',
+        num: '06',
         headline: 'Build Smarter Digital Experiences.',
         theme: 'Digital development poster',
         image: '/assets/images/design-projects/incodet-ads/INCODET_Digital_Development_Poster.png',
@@ -554,7 +546,7 @@ export const designProjects: DesignProject[] = [
       {
         label: 'Deliverables',
         value:
-          'Seven design concepts, including one A4 flyer, digital ad creatives, and promotional posters',
+          'Six design concepts, including one A4 flyer, digital ad creatives, and promotional posters',
       },
       {
         label: 'Intended Uses',
@@ -571,7 +563,6 @@ export const designProjects: DesignProject[] = [
       '/assets/images/incodet-ads/Incodet-Ad-C-Websites-That-Work copy.png',
       '/assets/images/incodet-ads/Incodet-Ad-B-Web-App-Development copy.png',
       '/assets/images/incodet-ads/Incodet-Ad-A-Switch-It-On copy.png',
-      '/assets/images/incodet-ads/Incodet-Ad-C-Websites-That-Work.png',
       '/assets/images/design-projects/incodet-ads/Enter_Reality__From_Concept_to_Launch.png',
       '/assets/images/design-projects/incodet-ads/INCODET_Digital_Development_Poster.png',
     ],

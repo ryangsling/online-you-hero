@@ -56,26 +56,14 @@ export function Cursor() {
       if (isInteractive(e.target as Element)) blobRef.current?.classList.remove("is-hover");
     };
 
-    const onLeaveWindow = () => {
-      if (blobRef.current) blobRef.current.style.opacity = "0";
-    };
-
-    const onEnterWindow = () => {
-      if (blobRef.current) blobRef.current.style.opacity = "1";
-    };
-
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseover", onOver);
     window.addEventListener("mouseout", onOut);
-    window.addEventListener("mouseleave", onLeaveWindow);
-    window.addEventListener("mouseenter", onEnterWindow);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseover", onOver);
       window.removeEventListener("mouseout", onOut);
-      window.removeEventListener("mouseleave", onLeaveWindow);
-      window.removeEventListener("mouseenter", onEnterWindow);
       document.documentElement.classList.remove("has-custom-cursor");
       if (raf) cancelAnimationFrame(raf);
     };
