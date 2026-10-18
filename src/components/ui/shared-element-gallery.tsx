@@ -27,38 +27,48 @@ const spring = {
   mass: 1,
 };
 
-export function Gallery({ children }: { children: React.ReactNode }) {
+export function Gallery({ children, images }: { children: React.ReactNode; images?: ImageData[] }) {
   const [selectedImage, setSelectedImage] = React.useState<ImageData | null>(null);
-  const [images, setImages] = React.useState<ImageData[]>([]);
+  const [registeredImages, setRegisteredImages] = React.useState<ImageData[]>([]);
 
-  const registerImage = React.useCallback((image: ImageData) => {
-    setImages((prev) => {
-      const existingIndex = prev.findIndex((item) => item.id === image.id);
+  const allImages = React.useMemo(
+    () => (images && images.length > 0 ? images : registeredImages),
+    [images, registeredImages],
+  );
 
-      if (existingIndex === -1) return [...prev, image];
+  const registerImage = React.useCallback(
+    (image: ImageData) => {
+      if (images && images.length > 0) return;
 
-      const existing = prev[existingIndex];
-      if (existing.src === image.src && existing.alt === image.alt) return prev;
+      setRegisteredImages((prev) => {
+        const existingIndex = prev.findIndex((item) => item.id === image.id);
 
-      const next = [...prev];
-      next[existingIndex] = image;
-      return next;
-    });
-  }, []);
+        if (existingIndex === -1) return [...prev, image];
+
+        const existing = prev[existingIndex];
+        if (existing.src === image.src && existing.alt === image.alt) return prev;
+
+        const next = [...prev];
+        next[existingIndex] = image;
+        return next;
+      });
+    },
+    [images],
+  );
 
   const goToRelative = React.useCallback(
     (offset: number) => {
       setSelectedImage((current) => {
-        if (!current || images.length < 2) return current;
+        if (!current || allImages.length < 2) return current;
 
-        const index = images.findIndex((item) => item.id === current.id);
+        const index = allImages.findIndex((item) => item.id === current.id);
         if (index === -1) return current;
 
-        const nextIndex = (index + offset + images.length) % images.length;
-        return images[nextIndex] ?? current;
+        const nextIndex = (index + offset + allImages.length) % allImages.length;
+        return allImages[nextIndex] ?? current;
       });
     },
-    [images],
+    [allImages],
   );
 
   React.useEffect(() => {
@@ -105,7 +115,7 @@ export function Gallery({ children }: { children: React.ReactNode }) {
         setSelectedImage,
         registerImage,
         goToRelative,
-        canNavigate: images.length > 1,
+        canNavigate: allImages.length > 1,
       }}
     >
       {children}
@@ -130,21 +140,33 @@ export function GalleryGrid({
 
 export function GalleryImage({
   src,
+  fullSrc,
   alt,
   id,
   className,
+  width,
+  height,
 }: {
   src: string;
+  fullSrc?: string;
   alt?: string;
   id: string;
   className?: string;
+  width?: number;
+  height?: number;
 }) {
   const context = React.useContext(GalleryContext);
   if (!context) throw new Error("GalleryImage must be used within a Gallery");
 
+  const [loaded, setLoaded] = React.useState(false);
+
   React.useEffect(() => {
-    context.registerImage({ id, src, alt });
-  }, [context, id, src, alt]);
+    setLoaded(false);
+  }, [src]);
+
+  React.useEffect(() => {
+    context.registerImage({ id, src: fullSrc ?? src, alt });
+  }, [context, id, src, fullSrc, alt]);
 
   return (
     <motion.div
@@ -154,15 +176,34 @@ export function GalleryImage({
         "relative mb-4 cursor-zoom-in break-inside-avoid overflow-hidden rounded-2xl border border-border/40 bg-muted",
         className,
       )}
+      style={width && height ? { aspectRatio: `${width} / ${height}` } : undefined}
       onClick={(e) => {
         e.stopPropagation();
-        context.setSelectedImage({ id, src, alt });
+        context.setSelectedImage({ id, src: fullSrc ?? src, alt });
       }}
     >
+      <div
+        aria-hidden="true"
+        className={cn(
+          "pointer-events-none absolute inset-0 bg-muted transition-opacity duration-300",
+          loaded ? "opacity-0" : "animate-pulse opacity-100",
+        )}
+      />
+
       <motion.img
         src={src}
         alt={alt ?? "Gallery image"}
-        className="h-auto w-full object-cover"
+        width={width}
+        height={height}
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        className={cn(
+          "block h-auto w-full object-cover transition-opacity duration-300",
+          loaded ? "opacity-100" : "opacity-0",
+        )}
         variants={{
           hover: { scale: 0.985 },
           tap: { scale: 0.97 },
@@ -255,6 +296,8 @@ function GalleryModal() {
               <motion.img
                 src={selectedImage.src}
                 alt={selectedImage.alt ?? "Selected gallery image"}
+                decoding="async"
+                fetchPriority="high"
                 className="h-auto max-h-[90vh] w-auto max-w-[95vw] rounded-2xl border border-white/10 object-contain shadow-2xl will-change-transform"
                 draggable={false}
                 onClick={(e) => e.stopPropagation()}

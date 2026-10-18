@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { Header } from "@/components/portfolio/Header";
@@ -7,8 +8,42 @@ import { designProjects } from "@/data/designProjects";
 import { designGalleryImages } from "@/data/designGalleryImages";
 import { Gallery, GalleryGrid, GalleryImage } from "@/components/ui/shared-element-gallery";
 
+const INITIAL_GALLERY_ITEMS = 12;
+const GALLERY_BATCH_SIZE = 12;
+
 export default function DesignPage() {
   const featured = designProjects.filter((p) => p.featured);
+
+  const [visibleCount, setVisibleCount] = useState(INITIAL_GALLERY_ITEMS);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
+
+  const visibleImages = designGalleryImages.slice(0, visibleCount);
+
+  const navigationImages = useMemo(
+    () => designGalleryImages.map((image) => ({ id: image.id, src: image.src, alt: image.alt })),
+    [],
+  );
+
+  useEffect(() => {
+    const node = loadMoreRef.current;
+    if (!node) return;
+    if (visibleCount >= designGalleryImages.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const hit = entries.some((entry) => entry.isIntersecting);
+        if (!hit) return;
+
+        setVisibleCount((current) =>
+          Math.min(current + GALLERY_BATCH_SIZE, designGalleryImages.length),
+        );
+      },
+      { rootMargin: "1200px 0px 1200px 0px" },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [visibleCount]);
 
   return (
     <div id="top" className="min-h-screen bg-background text-foreground">
@@ -51,6 +86,9 @@ export default function DesignPage() {
                     <img
                       src={project.cover}
                       alt={project.title}
+                      loading={i === 0 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={i === 0 ? "high" : "low"}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
                     <span className="absolute left-4 top-4 rounded-full bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground backdrop-blur">
@@ -111,15 +149,31 @@ export default function DesignPage() {
 
           <Reveal delay={160}>
             <div className="mt-8">
-              <Gallery>
+              <Gallery images={navigationImages}>
                 <GalleryGrid>
-                  {designGalleryImages.map((image) => (
-                    <GalleryImage key={image.id} id={image.id} src={image.src} alt={image.alt} />
+                  {visibleImages.map((image) => (
+                    <GalleryImage
+                      key={image.id}
+                      id={image.id}
+                      src={image.thumbSrc}
+                      fullSrc={image.src}
+                      alt={image.alt}
+                      width={image.width}
+                      height={image.height}
+                    />
                   ))}
                 </GalleryGrid>
               </Gallery>
             </div>
           </Reveal>
+
+          <Reveal>
+            <div className="mt-8 text-center text-xs text-muted-foreground">
+              Showing {visibleImages.length} of {designGalleryImages.length}
+            </div>
+          </Reveal>
+
+          <div ref={loadMoreRef} className="h-8" aria-hidden="true" />
 
           <Reveal>
             <p className="mt-10 text-center text-sm text-muted-foreground">
