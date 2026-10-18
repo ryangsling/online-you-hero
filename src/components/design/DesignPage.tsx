@@ -4,6 +4,8 @@ import { Header } from "@/components/portfolio/Header";
 import { Footer } from "@/components/portfolio/Footer";
 import Reveal from "@/components/design/Reveal";
 import { designProjects } from "@/data/designProjects";
+import { designGalleryImages } from "@/data/designGalleryImages";
+import { Gallery, GalleryGrid, GalleryImage } from "@/components/ui/shared-element-gallery";
 
 export default function DesignPage() {
   const featured = designProjects.filter((p) => p.featured);
@@ -96,41 +98,29 @@ export default function DesignPage() {
         <section className="mx-auto max-w-[1200px] px-6 pb-24">
           <Reveal>
             <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              All projects
+              Curated gallery ({designGalleryImages.length})
             </h2>
           </Reveal>
-          <div className="mt-8 divide-y divide-border border-y border-border">
-            {designProjects.map((project, i) => (
-              <Reveal key={project.slug} delay={i * 50}>
-                <Link
-                  to="/design/$slug"
-                  params={{ slug: project.slug }}
-                  className="group flex items-center justify-between gap-6 py-6 transition-colors"
-                >
-                  <div className="flex items-baseline gap-6">
-                    <span className="font-mono text-xs text-muted-foreground">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <h3 className="font-display text-2xl transition-colors group-hover:text-accent">
-                        {project.title}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">{project.summary}</p>
-                    </div>
-                  </div>
-                  <div className="hidden shrink-0 items-center gap-4 sm:flex">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-                      {project.year}
-                    </span>
-                    <ArrowRight
-                      size={16}
-                      className="text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:text-accent"
-                    />
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={80}>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              A living wall of all design explorations from{" "}
+              <span className="font-mono">all_designs</span>. Click any piece to expand, then drag
+              vertically or press escape to close.
+            </p>
+          </Reveal>
+
+          <Reveal delay={160}>
+            <div className="mt-8">
+              <Gallery>
+                <GalleryGrid>
+                  {designGalleryImages.map((image) => (
+                    <GalleryImage key={image.id} id={image.id} src={image.src} alt={image.alt} />
+                  ))}
+                </GalleryGrid>
+              </Gallery>
+            </div>
+          </Reveal>
+
           <Reveal>
             <p className="mt-10 text-center text-sm text-muted-foreground">
               Want work like this on your product?{" "}
