@@ -8,9 +8,9 @@ import { ProjectsStack } from "@/components/portfolio/ProjectsStack";
 import { Blog } from "@/components/portfolio/Blog";
 import { Toolkit } from "@/components/portfolio/Toolkit";
 import { Contact } from "@/components/portfolio/Contact";
+import { DesignHighlights } from "@/components/portfolio/DesignHighlights";
 import { Footer } from "@/components/portfolio/Footer";
 import { SessionHUD } from "@/components/portfolio/SessionHUD";
-import { Cursor } from "@/components/portfolio/Cursor";
 
 const title = "Ahmed Alif - AI-Native Developer & Vibe Engineer";
 const description =
@@ -60,13 +60,13 @@ function Index() {
         <About />
         <Experience />
         <ProjectsStack />
+        <DesignHighlights />
         <Blog />
         <Toolkit />
         <Contact />
       </main>
       <Footer />
       <SessionHUD />
-      <Cursor />
     </div>
   );
 }

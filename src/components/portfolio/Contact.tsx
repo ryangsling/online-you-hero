@@ -48,7 +48,11 @@ export function Contact() {
       setForm({ email: "", projectType: projectTypes[0], budget: budgets[1], message: "" });
     } catch (err) {
       console.error(err);
-      setErrorMsg("Something went wrong. Please try again or email me directly.");
+      setErrorMsg(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again or email me directly.",
+      );
       setStatus("error");
     }
   }
