@@ -99,12 +99,15 @@ export const submitInquiry = createServerFn({ method: "POST" })
       console.warn("[contact] RESEND_API_KEY is not set; skipping email delivery");
     }
 
-    if (!savedToDb && !sentViaResend) {
+    if (!sentViaResend) {
       const details = [
-        dbErrorMessage ? `Supabase: ${dbErrorMessage}` : "Supabase: unavailable",
         resendErrorMessage ? `Resend: ${resendErrorMessage}` : "Resend: unavailable",
-      ].join(" | ");
-      throw new Error(`Could not submit inquiry right now. ${details}`);
+        dbErrorMessage ? `Supabase: ${dbErrorMessage}` : null,
+      ]
+        .filter(Boolean)
+        .join(" | ");
+
+      throw new Error(`Could not deliver inquiry email right now. ${details}`);
     }
 
     return { ok: true as const, savedToDb, sentViaResend };

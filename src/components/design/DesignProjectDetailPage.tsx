@@ -125,8 +125,11 @@ export default function DesignProjectDetailPage({ slug }: { slug: string }) {
               <h2 className="font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground">
                 Brief
               </h2>
-              {project.description.split('\n\n').map((para) => (
-                <p key={para.slice(0, 40)} className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground first:mt-0">
+              {project.description.split("\n\n").map((para) => (
+                <p
+                  key={para.slice(0, 40)}
+                  className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground first:mt-0"
+                >
                   {para}
                 </p>
               ))}
@@ -237,7 +240,10 @@ function Section({ section }: { section: DesignProjectSection }) {
       {section.bullets && section.bullets.length > 0 && (
         <ul className="mt-4 max-w-2xl space-y-3">
           {section.bullets.map((item) => (
-            <li key={item.slice(0, 40)} className="flex items-start gap-3 text-base text-foreground">
+            <li
+              key={item.slice(0, 40)}
+              className="flex items-start gap-3 text-base text-foreground"
+            >
               <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
               {item}
             </li>
@@ -266,7 +272,7 @@ function Section({ section }: { section: DesignProjectSection }) {
                     <td
                       key={i}
                       className={`px-4 py-3 align-top ${
-                        i === 0 ? 'font-medium text-foreground' : 'text-muted-foreground'
+                        i === 0 ? "font-medium text-foreground" : "text-muted-foreground"
                       }`}
                     >
                       {i === 1 ? <span className="font-mono text-xs">{cell}</span> : cell}
@@ -322,7 +328,7 @@ function VideoGallery({ videos }: { videos: DesignProjectVideo[] }) {
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="font-mono text-xs text-accent">
-                    {String(i + 2).padStart(2, '0')}
+                    {String(i + 2).padStart(2, "0")}
                   </span>
                   <span className="text-right font-mono text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
                     {video.category}
@@ -357,51 +363,49 @@ function YouTubeEmbed({ id, title }: { id: string; title: string }) {
   }
 
   return (
-    <button
-      type="button"
-      onClick={() => setActive(true)}
-      aria-label={`Play video: ${title}`}
-      className="group relative block h-full w-full cursor-pointer bg-black"
-    >
-      <img
-        src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
-        alt=""
-        loading="lazy"
-        className="absolute inset-0 h-full w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
-        onError={(e) => {
-          const img = e.currentTarget;
-          if (!img.src.includes('hqdefault.jpg')) {
-            img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
-          }
-        }}
-      />
-      <span className="absolute inset-0 flex items-center justify-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/90 shadow-lg transition-transform group-hover:scale-110">
-          <svg viewBox="0 0 24 24" className="ml-1 h-7 w-7 fill-black" aria-hidden="true">
-            <path d="M8 5v14l11-7z" />
-          </svg>
+    <div className="group relative h-full w-full bg-black">
+      <button
+        type="button"
+        onClick={() => setActive(true)}
+        aria-label={`Play video: ${title}`}
+        className="relative block h-full w-full cursor-pointer bg-black"
+      >
+        <img
+          src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+          alt=""
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (!img.src.includes("hqdefault.jpg")) {
+              img.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+            }
+          }}
+        />
+        <span className="absolute inset-0 flex items-center justify-center">
+          <span className="flex h-16 w-16 items-center justify-center rounded-full bg-accent/90 shadow-lg transition-transform group-hover:scale-110">
+            <svg viewBox="0 0 24 24" className="ml-1 h-7 w-7 fill-black" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </span>
         </span>
-      </span>
+      </button>
+
       <a
         href={`https://www.youtube.com/watch?v=${id}`}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={(e) => e.stopPropagation()}
         aria-label={`Watch ${title} on YouTube`}
-        className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+        className="absolute right-3 top-3 z-10 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-colors hover:bg-black/80"
       >
         Watch on YouTube
         <ExternalLink size={11} />
       </a>
-    </button>
+    </div>
   );
 }
 
-function PostBreakdown({
-  posts,
-}: {
-  posts: DesignProject['posts'];
-}) {
+function PostBreakdown({ posts }: { posts: DesignProject["posts"] }) {
   if (!posts || posts.length === 0) return null;
   return (
     <div className="mt-12">
